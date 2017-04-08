@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+   <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../static/css/loginRegistration.css" th:href="@{css/loginRegistration.css}" />
 </head>
 <body>
 <form action="/signup" method="post">
-
 
     <!--<div th:if="${param.error}">-->
         <!--Invalid username and password.-->
@@ -23,6 +24,55 @@
 
 
 </form>
+
+<img src="http://image005.flaticon.com/1/svg/74/74229.svg" alt="user icon" class="logo"/>
+<div class="cd-tabs">
+    <nav>
+        <ul class="cd-tabs-navigation">
+            <li><a href="#" data-content="login" class="selected">login</a></li>
+            <li><a href="#" data-content="signup">signup</a></li>
+        </ul>
+    </nav>
+    <ul class="cd-tabs-content">
+        <li data-content="login" class="selected">
+            <form name="login-form">
+                <div class="form-fild">
+                    <label for="username">username</label>
+                    <input type="text" name="username"/>
+                </div>
+                <div class="form-fild">
+                    <label for="password">password</label>
+                    <input type="password" name="password"/>
+                </div>
+                <span class="error"></span>
+                <button type="submit">Submit</button>
+            </form>
+        </li>
+        <li data-content="signup">
+            <form name="signup-form">
+                <div class="form-fild">
+                    <label for="susername">username</label>
+                    <input type="text" name="susername"/>
+                </div>
+                <div class="form-fild">
+                    <label for="spassword">password</label>
+                    <input type="password" name="spassword"/>
+                </div>
+                <div class="form-fild">
+                    <label for="spassword2">password again</label>
+                    <input type="password" name="spassword2"/>
+                </div>
+                <span class="error"></span>
+                <button type="submit">Submit</button>
+            </form>
+        </li>
+    </ul>
+</div> <!-- end cd-tabs -->
+
+
+
+
+
 
 
 </body>
