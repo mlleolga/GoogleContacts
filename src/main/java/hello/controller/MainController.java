@@ -28,16 +28,6 @@ public class MainController {
     @PostConstruct
     void init() {
     //    importData();
-     //   importUser();
-    }
-
-    private void importUser() {
-        User user = new User();
-        user.setEmail("2");
-        user.setPassword(passwordEncoder.encode("2"));
-        user.setName("sasha");
-        user.setRole(Role.USER);
-        userRepository.save(user);
     }
 
     public void importData() {
@@ -57,11 +47,6 @@ public class MainController {
         user.setName("sasha");
         user.setRole(Role.ADMIN);
         return user;
-    }
-
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    private void login(@RequestParam  String email, @RequestParam  String password){
-        authenticationService.authenticate(email, password);
     }
 
 }

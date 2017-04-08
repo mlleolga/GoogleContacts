@@ -10,14 +10,9 @@ import hello.service.GroupService;
 import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +30,12 @@ public class GreetingController {
     @Autowired
     GroupService groupService;
 
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    private String login(@RequestParam String email, @RequestParam  String password){
+        authenticationService.authenticate(email, password);
+        return "contacts";
+    }
 
     @RequestMapping("/greeting")
     public String greeting(Model model) {
