@@ -27,18 +27,10 @@ public class MainController {
 
     @PostConstruct
     void init() {
-    //    importData();
-     //   importUser();
+       // importData();
     }
 
-    private void importUser() {
-        User user = new User();
-        user.setEmail("2");
-        user.setPassword(passwordEncoder.encode("2"));
-        user.setName("sasha");
-        user.setRole(Role.USER);
-        userRepository.save(user);
-    }
+
 
     public void importData() {
         userRepository.save(createUser());

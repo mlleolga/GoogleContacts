@@ -89,16 +89,12 @@
             success: function (res) {
                 $("#hint").hide();
                 $.each (res, function (i) {
-                    all+='name = '+res[i].name +'<br/> ';
+                    all+='<a href="#" onclick = "submit('+res[i].name +')"> '+res[i].name +'</a><br/> ';
                     $("#hint").show();
                     $("#hint").html(all);
                 });
 
 
-        /*        $("#hint").show();
-                $("#hint").html('<a href="#" onclick="submit(' + res[0].name + ')">' + res[0].name + '</a>');
-                console.log('name = ' + res[0].name);
-                console.log(res)*/
             }
         });
     });
