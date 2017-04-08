@@ -89,7 +89,7 @@
             success: function (res) {
                 $("#hint").hide();
                 $.each (res, function (i) {
-                    all+='<a href="#" onclick = "submit('+res[i].name +')"> '+res[i].name +'</a><br/> ';
+                    all+='<a href="#" onclick = "submit('+'\''+res[i].name+'\'' +')"> '+res[i].name +'</a><br/> ';
                     $("#hint").show();
                     $("#hint").html(all);
                 });

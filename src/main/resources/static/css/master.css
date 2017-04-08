@@ -1,0 +1,10 @@
+html,body {
+    font-size:13px;
+    font-family: pfdr, tahoma, sans-serif;
+    background:yellow;
+    line-height: 1.3;
+
+}
+#ccc{
+    border:1px solid red;
+}
