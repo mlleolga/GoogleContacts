@@ -8,88 +8,104 @@
 
 <form id="addContact" action="register">
 
-     <div><label> Contact Name : <input type="text" id="name"/> </label></div>
+    <div><label> Contact Name : <input type="text" id="name"/> </label></div>
     <div><label> Contact Email : <input type="email" id="email"/> </label></div>
     <div><label> Contact phone : <input id="phone"/> </label></div>
     <div><label> Groups : <input id="groups"/> </label>
-        <div id ="hint" style="display: none; width:200px; height:200px; background: blue"> aaa</div>
+        <div id="hint" style="display: none; width:200px; height:200px; background: #E0FFFF"> aaa</div>
     </div>
 
- <!--   <p><select id="group">
-         <option value="1">Чебурашка</option>
-        <option value="1">Крокодил Гена</option>
-        <option value="1">Шапокляк</option>
-        <option value="1">Крыса Лариса</option>
-    </select></p>-->
-    <div><input type="submit" value="Add Contact" /></div>
+    <!--   <p><select id="group">
+            <option value="1">Чебурашка</option>
+           <option value="1">Крокодил Гена</option>
+           <option value="1">Шапокляк</option>
+           <option value="1">Крыса Лариса</option>
+       </select></p>-->
+    <div><input type="submit" value="Add Contact"/></div>
 
 </form>
 
+<div id="contactsBlock" style="display: block; width:700px; height:200px; background: #E0FFFF"> aaa</div>
 
 
 <script type="text/javascript">
-$( document ).ready(function() {
-console.log( "ready!" );
-    $.ajax({
-        url :"getContacts" ,
-        method : 'get',
-        success : function (res) {
-            console.log(res);
-        }
-    });
-});
+    $(document).ready(getContacts());
 
-$( "#addContact" ).submit(function( event ) {
-    console.log(5);
-    event.preventDefault();
+    function getContacts() {
+        var all = '';
+        console.log("ready!");
+        $.ajax({
+            url: "getContacts",
+            method: 'get',
+            success: function (res) {
 
-    var contactDto = {
-        email : $("#email").val(),
-        name : $("#name").val(),
-        phone : $("#phone").val(),
-        group : $("#groups").val()
+                $.each (res, function (i) {
+                    all+='name = '+res[i].name +' email = '+res[i].phone +' phone ='+res[i].email +'  group ='+res[i].group +'<br/> ';
+                });
+                $("#contactsBlock").html(all);
+            }
+        });
     }
 
-    console.log(contactDto);
-    $.ajax({
-        url :"addContact" ,
-        method : 'POST',
-        contentType: 'application/json; charset=UTF-8',
-        dataType : 'json',
-        data : JSON.stringify(contactDto),
-        success : function (res) {
-            console.log("Login");
-        }
-    });
-});
 
-$( "#groups" ).keyup(function() {
-    var nameDTO = {
-        name :$("#groups").val()
+
+    $("#addContact").submit(function (event) {
+        console.log(5);
+        event.preventDefault();
+
+        var contactDto = {
+            email: $("#email").val(),
+            name: $("#name").val(),
+            phone: $("#phone").val(),
+            group: $("#groups").val()
+        }
+
+        console.log(contactDto);
+        $.ajax({
+            url: "addContact",
+            method: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify(contactDto),
+            success: function (res) {
+                console.log("AddedContact");
+                getContacts();
+            }
+        });
+    });
+
+    $("#groups").keyup(function () {
+        var nameDTO = {
+            name: $("#groups").val()
+        }
+        console.log($("#groups").val());
+        var all = '';
+        $.ajax({
+            url: "getGroupsByName",
+            method: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify(nameDTO),
+            success: function (res) {
+                $("#hint").hide();
+                $.each (res, function (i) {
+                    all+='name = '+res[i].name +'<br/> ';
+                    $("#hint").show();
+                    $("#hint").html(all);
+                });
+
+
+        /*        $("#hint").show();
+                $("#hint").html('<a href="#" onclick="submit(' + res[0].name + ')">' + res[0].name + '</a>');
+                console.log('name = ' + res[0].name);
+                console.log(res)*/
+            }
+        });
+    });
+
+    function submit(groupName) {
+        $("#groups").val(groupName);
     }
-    console.log($("#groups").val());
-
-    $.ajax({
-        url :"getGroupsByName" ,
-        method : 'POST',
-        contentType: 'application/json; charset=UTF-8',
-        dataType : 'json',
-        data : JSON.stringify(nameDTO),
-        success : function (res) {
-            $("#hint").show();
-            $("#hint").html('<a href="#" onclick="submit('+res[0].name +')">'+res[0].name +'</a>');
-            console.log('name = '+res[0].name);
-          console.log(res)
-        }
-    });
-});
-
-function submit(groupName){
-    $("#groups").val(groupName);
-}
-
-
-
 
 
 </script>

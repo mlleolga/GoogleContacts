@@ -7,6 +7,7 @@ import hello.domain.UserDTO;
 import hello.domain.entity.Contacts;
 import hello.domain.entity.Role;
 import hello.domain.entity.User;
+import hello.mapper.ContactMapper;
 import hello.repository.UserRepository;
 import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService{
         UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ContactMapper contactMapper;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -51,7 +55,7 @@ public class UserServiceImpl implements UserService{
         List<ContactDTO> contactDTOS = new ArrayList<>();
 
         userRepository.findById(id).getContactsList().forEach(contacts -> {
-            contactDTOS.add(mathcer(contacts));
+            contactDTOS.add(contactMapper.parserToDTO(contacts));
         });
         return contactDTOS;
     }
@@ -61,12 +65,6 @@ public class UserServiceImpl implements UserService{
      return userRepository.findById(userId);
     }
 
-    private ContactDTO mathcer(Contacts contact){
-        ContactDTO contactDTO = new ContactDTO();
-        contactDTO.setName(contact.getName());
-        contactDTO.setEmail(contact.getEmail());
-        contactDTO.setPhone(contact.getPhone());
-        return contactDTO;
-    }
+
 
 }
