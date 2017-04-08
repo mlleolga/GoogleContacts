@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="springbootdb@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="springbootdb">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="library"/>
+    <schema id="5" parent="1" name="lib_sasha_01"/>
+    <schema id="6" parent="1" name="mysql"/>
+    <schema id="7" parent="1" name="performance_schema"/>
+    <schema id="8" parent="1" name="spring_sasha_04"/>
+    <schema id="9" parent="1" name="spring_sasha_05"/>
+    <schema id="10" parent="1" name="spring_sasha_07"/>
+    <schema id="11" parent="1" name="spring_start"/>
+    <schema id="12" parent="1" name="test"/>
+    <table id="13" parent="2" name="contacts"/>
+    <table id="14" parent="2" name="groups"/>
+    <table id="15" parent="2" name="users"/>
+    <column id="16" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="17" parent="13" name="email">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="18" parent="13" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="19" parent="13" name="phone">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="20" parent="13" name="groups_id">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="21" parent="13" name="user_id">
+      <Position>6</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="22" parent="13" name="FKna8bddygr3l3kq1imghgcskt8">
+      <ColNames>user_id</ColNames>
+    </index>
+    <index id="23" parent="13" name="FKppf458vf46nqceq9o480yeh7y">
+      <ColNames>groups_id</ColNames>
+    </index>
+    <key id="24" parent="13" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="25" parent="13" name="FKppf458vf46nqceq9o480yeh7y">
+      <ColNames>groups_id</ColNames>
+      <RefSchemaName>springbootdb</RefSchemaName>
+      <RefTableName>groups</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="26" parent="13" name="FKna8bddygr3l3kq1imghgcskt8">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>springbootdb</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="27" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="28" parent="14" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="14" name="user_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="30" parent="14" name="FK4cygfv5el2o2v3hbkdkscfw5q">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="31" parent="14" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="32" parent="14" name="FK4cygfv5el2o2v3hbkdkscfw5q">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>springbootdb</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="33" parent="15" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="34" parent="15" name="email">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="35" parent="15" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="36" parent="15" name="password">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="37" parent="15" name="role">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="38" parent="15" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

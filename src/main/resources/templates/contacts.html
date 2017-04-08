@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+</head>
+<body>
+
+<form id="addContact" action="register">
+
+     <div><label> Contact Name : <input type="text" id="name"/> </label></div>
+    <div><label> Contact Email : <input type="email" id="email"/> </label></div>
+    <div><label> Contact phone : <input id="phone"/> </label></div>
+    <div><label> Groups : <input id="groups"/> </label>
+        <div id ="hint" style="display: none; width:200px; height:200px; background: blue"> aaa</div>
+    </div>
+
+ <!--   <p><select id="group">
+         <option value="1">Чебурашка</option>
+        <option value="1">Крокодил Гена</option>
+        <option value="1">Шапокляк</option>
+        <option value="1">Крыса Лариса</option>
+    </select></p>-->
+    <div><input type="submit" value="Add Contact" /></div>
+
+</form>
+
+
+
+<script type="text/javascript">
+$( document ).ready(function() {
+console.log( "ready!" );
+    $.ajax({
+        url :"getContacts" ,
+        method : 'get',
+        success : function (res) {
+            console.log(res);
+        }
+    });
+});
+
+$( "#addContact" ).submit(function( event ) {
+    console.log(5);
+    event.preventDefault();
+
+    var contactDto = {
+        email : $("#email").val(),
+        name : $("#name").val(),
+        phone : $("#phone").val(),
+        group : $("#groups").val()
+    }
+
+    console.log(contactDto);
+    $.ajax({
+        url :"addContact" ,
+        method : 'POST',
+        contentType: 'application/json; charset=UTF-8',
+        dataType : 'json',
+        data : JSON.stringify(contactDto),
+        success : function (res) {
+            console.log("Login");
+        }
+    });
+});
+
+$( "#groups" ).keyup(function() {
+    var nameDTO = {
+        name :$("#groups").val()
+    }
+    console.log($("#groups").val());
+
+    $.ajax({
+        url :"getGroupsByName" ,
+        method : 'POST',
+        contentType: 'application/json; charset=UTF-8',
+        dataType : 'json',
+        data : JSON.stringify(nameDTO),
+        success : function (res) {
+            $("#hint").show();
+            $("#hint").html('<a href="#" onclick="submit('+res[0].name +')">'+res[0].name +'</a>');
+            console.log('name = '+res[0].name);
+          console.log(res)
+        }
+    });
+});
+
+function submit(groupName){
+    $("#groups").val(groupName);
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>
