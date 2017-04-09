@@ -4,6 +4,7 @@ import hello.domain.ContactDTO;
 import hello.domain.entity.Contacts;
 import hello.domain.entity.Groups;
 import hello.domain.entity.User;
+import hello.mapper.ContactMapper;
 import hello.repository.ContactsRepository;
 import hello.service.ContactService;
 import hello.service.GroupService;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
  * Created by sasha on 07.04.2017.
  */
 @Service
-public class ContactServiceImpl implements ContactService{
+public class ContactServiceImpl implements ContactService {
     @Autowired
     private UserService userService;
     @Autowired
@@ -23,17 +24,21 @@ public class ContactServiceImpl implements ContactService{
 
     @Autowired
     private ContactsRepository contactsRepository;
+    @Autowired
+    private ContactMapper contactMapper;
 
     @Override
-    public void addContact(ContactDTO contactDTO, Long userId) {
-        Contacts contact = new Contacts();
-        contact.setEmail(contactDTO.getEmail());
-        contact.setName(contactDTO.getName());
-        contact.setPhone(contactDTO.getPhone());
+    public Contacts addContact(ContactDTO contactDTO, Long userId) {
+        Contacts contact = contactMapper.parserToEntity(contactDTO);
         User user = userService.findUserById(userId);
-        contact.setUser(user);
         contact.setGroups(checkGroup(contactDTO.getGroup(),user));
-        contactsRepository.save(contact);
+        contact.setUser(user);
+      return contactsRepository.save(contact);
+    }
+
+    @Override
+    public ContactDTO editContact(ContactDTO contactDTO, Long userId) {
+      return  contactMapper.parserToDTO(addContact(contactDTO,userId));
     }
 
     private Groups checkGroup(String groupName,User user){
@@ -42,7 +47,7 @@ public class ContactServiceImpl implements ContactService{
             Groups newGroup = new Groups();
             newGroup.setName(groupName);
             newGroup.setUser(user);
-           return groupService.save(newGroup);
+            return groupService.save(newGroup);
         }else{
             return group;
         }

@@ -96,5 +96,13 @@ public class GreetingController {
         return groupService.findByPartName(nameDTO.getName(),authenticationService.getUserId());
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/editcontact" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ContactDTO editContact(@RequestBody ContactDTO contactDTO) {
+        return contactService.editContact(contactDTO,authenticationService.getUserId());
+     //   return groupService.findByPartName(nameDTO.getName(),authenticationService.getUserId());
+
+    }
+
 
 }

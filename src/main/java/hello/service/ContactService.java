@@ -1,6 +1,7 @@
 package hello.service;
 
 import hello.domain.ContactDTO;
+import hello.domain.entity.Contacts;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface ContactService {
-    void addContact(ContactDTO contactDTO,Long userId);
+    Contacts addContact(ContactDTO contactDTO, Long userId);
+
+    ContactDTO editContact(ContactDTO contactDTO, Long userId);
 
 }

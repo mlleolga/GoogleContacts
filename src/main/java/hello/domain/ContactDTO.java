@@ -5,6 +5,8 @@ package hello.domain;
  */
 public class ContactDTO {
 
+    private Long id;
+
     private String name;
 
     private String email;
@@ -46,5 +48,13 @@ public class ContactDTO {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
