@@ -38,7 +38,9 @@ function windowLoaded() {
     }
 
     var inputs = document.querySelectorAll('input');
+    console.log(inputs.length);
     for (var i = 0; i < inputs.length; i++) {
+
         inputs[i].addEventListener('focus', inputFocused, false);
     }
 
@@ -46,4 +48,4 @@ function windowLoaded() {
         var label = document.querySelectorAll('label[for=\''+ this.name +'\']')[0];
         label.className = 'focused';
     }
-}	
+}

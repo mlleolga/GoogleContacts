@@ -14,7 +14,7 @@ public interface UserService extends UserDetailsService{
 
         List<User> getAllUsers();
 
-        void saveNewUser(UserDTO userDTO);
+        boolean saveNewUser(UserDTO userDTO);
 
         List<ContactDTO> getUsersContacts(Long id);
 

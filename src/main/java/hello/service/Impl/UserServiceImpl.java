@@ -4,7 +4,6 @@ package hello.service.Impl;
 
 import hello.domain.ContactDTO;
 import hello.domain.UserDTO;
-import hello.domain.entity.Contacts;
 import hello.domain.entity.Role;
 import hello.domain.entity.User;
 import hello.mapper.ContactMapper;
@@ -15,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +39,18 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public  void saveNewUser(UserDTO userDTO) {
+    public  boolean saveNewUser(UserDTO userDTO) {
         User user = new User();
         user.setEmail(userDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setName(userDTO.getName());
-        user.setRole(Role.USER);
-        userRepository.save(user);
+        if(userRepository.findByEmail(userDTO.getEmail())==null) {
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            user.setName(userDTO.getName());
+            user.setRole(Role.USER);
+            userRepository.save(user);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
