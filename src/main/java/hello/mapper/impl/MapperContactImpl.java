@@ -37,7 +37,9 @@ public class MapperContactImpl implements ContactMapper {
     @Override
     public Contacts parserToEntity(ContactDTO contactDTO) {
         Contacts contact = new Contacts();
-        contact.setId(contactDTO.getId());
+        if(contactDTO.getId()!=null) {
+            contact.setId(contactDTO.getId());
+        }
         contact.setEmail(contactDTO.getEmail());
         contact.setName(contactDTO.getName());
         contact.setPhone(contactDTO.getPhone());
