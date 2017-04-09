@@ -32,7 +32,7 @@ public class GreetingController {
 
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    private String login(@RequestParam String email, @RequestParam  String password){
+    private String login(@RequestParam String email, @RequestParam String password) {
         authenticationService.authenticate(email, password);
         return "contacts";
     }
@@ -56,8 +56,9 @@ public class GreetingController {
 
         return userService.getUsersContacts(authenticationService.getUserId());
     }
+
     @RequestMapping("/contacts")
-    public String contacts(){
+    public String contacts() {
         return "contacts";
     }
 
@@ -70,30 +71,36 @@ public class GreetingController {
 
     @RequestMapping("/register")
     public String register() {
-           return "/register";
+        return "/register";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/register2" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-   public boolean newUserRegister(@RequestBody UserDTO userDTO) {
-  userService.saveNewUser(userDTO);
-  return true;
+    @RequestMapping(value = "/register2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean newUserRegister(@RequestBody UserDTO userDTO) {
+       return userService.saveNewUser(userDTO);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/addContact" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/authregister", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    private boolean login2(@RequestBody UserDTO userDTO) {
+        authenticationService.authenticate(userDTO.getEmail(), userDTO.getPassword());
+        return true;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addContact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public boolean addContact(@RequestBody ContactDTO contactDTO) {
- //       userService.saveNewUser(userDTO);
-        contactService.addContact(contactDTO,  authenticationService.getUserId());
-       return true;
+        //       userService.saveNewUser(userDTO);
+        contactService.addContact(contactDTO, authenticationService.getUserId());
+        return true;
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/getGroupsByName" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getGroupsByName", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Groups> findGroupsByPartName(@RequestBody NameDTO nameDTO) {
 
-        return groupService.findByPartName(nameDTO.getName(),authenticationService.getUserId());
+        return groupService.findByPartName(nameDTO.getName(), authenticationService.getUserId());
     }
 
 
