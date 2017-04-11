@@ -29,19 +29,50 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contacts addContact(ContactDTO contactDTO, Long userId) {
-        Contacts contact = contactMapper.parserToEntity(contactDTO);
         User user = userService.findUserById(userId);
+        if(contactsRepository.findByEmailAndUser(contactDTO.getEmail(),user)!=null){
+            return null;
+        }
+        Contacts contact = contactMapper.parserToEntity(contactDTO);
+
         contact.setGroups(checkGroup(contactDTO.getGroup(),user));
         contact.setUser(user);
       return contactsRepository.save(contact);
     }
 
     @Override
-    public ContactDTO editContact(ContactDTO contactDTO, Long userId) {
-      return  contactMapper.parserToDTO(addContact(contactDTO,userId));
+    public void deleteOneContact(Long id) {
+        contactsRepository.delete(id);
     }
 
-    private Groups checkGroup(String groupName,User user){
+    @Override
+    public void deleteAllUsersContacts(Long userId) {
+        userService.findUserById(userId).getContactsList().forEach(contactsRepository::delete);
+
+    }
+
+    @Override
+    public ContactDTO editContact(ContactDTO contactDTO, Long userId) {
+      return  contactMapper.parserToDTO(editContact1(contactDTO,userId));
+    }
+
+    @Override
+    public ContactDTO getContactToEdit(Long id) {
+       return contactMapper.parserToDTO(contactsRepository.findOne(id));
+    }
+
+    private Contacts editContact1(ContactDTO contactDTO, Long userId){
+        User user = userService.findUserById(userId);
+        Contacts contact = contactMapper.parserToEntity(contactDTO);
+        contact.setGroups(checkGroup(contactDTO.getGroup(),user));
+        contact.setUser(user);
+        return contactsRepository.save(contact);
+
+    }
+
+
+
+    private Groups checkGroup(String groupName, User user){
         Groups group = groupService.findByName(groupName,user);
         if(group == null){
             Groups newGroup = new Groups();
@@ -52,4 +83,6 @@ public class ContactServiceImpl implements ContactService {
             return group;
         }
     }
+
+
 }

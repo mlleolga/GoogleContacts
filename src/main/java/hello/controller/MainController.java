@@ -27,7 +27,7 @@ public class MainController {
 
     @PostConstruct
     void init() {
-    //    importData();
+       importData();
     }
 
     public void importData() {

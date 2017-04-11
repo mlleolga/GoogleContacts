@@ -13,4 +13,10 @@ public interface ContactService {
 
     ContactDTO editContact(ContactDTO contactDTO, Long userId);
 
+    ContactDTO getContactToEdit(Long id);
+
+    void deleteOneContact(Long id);
+
+    void deleteAllUsersContacts(Long userId);
+
 }

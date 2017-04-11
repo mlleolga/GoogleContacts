@@ -13,7 +13,7 @@ public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     // The user's email
 
     private String email;
@@ -25,7 +25,7 @@ public class User implements UserDetails{
 
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER )
     private List<Contacts> contactsList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -78,7 +78,7 @@ public class User implements UserDetails{
 
 // Getter and setter methods
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

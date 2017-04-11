@@ -43,11 +43,18 @@
             success : function (res) {
                 console.log("Login");
                 $('#name').innerHTML = 'New user registered';
+                clearForm();
+
             }
         });
     });
 
-    </script>
+    function clearForm() {
+        $('#registerform')[0].reset();
+    }
+
+
+</script>
 
 
 </body>

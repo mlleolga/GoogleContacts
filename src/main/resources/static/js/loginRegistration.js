@@ -1,4 +1,3 @@
-
 window.addEventListener('load', windowLoaded, false);
 
 function windowLoaded() {
@@ -45,7 +44,7 @@ function windowLoaded() {
     }
 
     function inputFocused(event) {
-        var label = document.querySelectorAll('label[for=\''+ this.name +'\']')[0];
+        var label = document.querySelectorAll('label[for=\'' + this.name + '\']')[0];
         label.className = 'focused';
     }
 }

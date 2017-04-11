@@ -20,7 +20,7 @@ public class Contacts {
     private String email;
 
     private String phone;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
