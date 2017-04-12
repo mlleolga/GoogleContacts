@@ -14,10 +14,8 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    // The user's email
 
     private String email;
-    // The user's name
 
     private String name;
 
@@ -30,9 +28,6 @@ public class User implements UserDetails{
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Groups> groupList;
-    // ------------------------
-    // PUBLIC METHODS
-    // ------------------------
 
     public User() { }
 

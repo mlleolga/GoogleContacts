@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by sasha on 07.04.2017.
- */
 @Service
 public class GroupsServiceImpl implements GroupService{
     @Autowired

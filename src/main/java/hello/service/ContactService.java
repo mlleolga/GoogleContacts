@@ -5,7 +5,7 @@ import hello.domain.entity.Contacts;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by sasha on 07.04.2017.
+ * Created by olya on 07.04.2017.
  */
 @Service
 public interface ContactService {

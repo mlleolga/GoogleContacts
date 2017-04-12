@@ -1,7 +1,7 @@
 package hello.domain;
 
 /**
- * Created by sasha on 01.04.2017.
+ * Created by olya on 01.04.2017.
  */
 public class ContactDTO {
 

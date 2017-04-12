@@ -1,5 +1,4 @@
 $("#registerform").submit(function (event) {
-    console.log(5);
     event.preventDefault();
 
     var userDTO = {

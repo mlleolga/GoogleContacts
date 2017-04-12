@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- * Created by sasha on 27.03.2017.
+ * Created by olya on 27.03.2017.
  */
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     public static final Logger LOG

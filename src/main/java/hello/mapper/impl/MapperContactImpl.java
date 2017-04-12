@@ -4,18 +4,10 @@ import hello.domain.ContactDTO;
 import hello.domain.entity.Contacts;
 import hello.domain.entity.Groups;
 import hello.mapper.ContactMapper;
-import hello.service.GroupService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by sasha on 08.04.2017.
- */
 @Component
 public class MapperContactImpl implements ContactMapper {
-
-    @Autowired
-    private GroupService groupService;
 
     @Override
     public ContactDTO parserToDTO(Contacts contacts) {

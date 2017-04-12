@@ -44,7 +44,7 @@ public class MainController {
         User user = new User();
         user.setEmail("1");
         user.setPassword(passwordEncoder.encode("1"));
-        user.setName("sasha");
+        user.setName("olya");
         user.setRole(Role.ADMIN);
         return user;
     }

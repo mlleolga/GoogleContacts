@@ -31,7 +31,6 @@ public class GreetingController {
     @Autowired
     GroupService groupService;
 
-
     @PostMapping(value = "/signup")
     private String login(@RequestParam String email, @RequestParam String password) {
         authenticationService.authenticate(email, password);
@@ -53,9 +52,7 @@ public class GreetingController {
     @RequestMapping("/getContacts")
     @ResponseBody
     public List<ContactDTO> Contacts() {
-        //    return authenticationService.getUserEmail();
-
-        return userService.getUsersContacts(authenticationService.getUserId());
+         return userService.getUsersContacts(authenticationService.getUserId());
     }
 
     @RequestMapping("/contacts")
@@ -68,7 +65,6 @@ public class GreetingController {
         authenticationService.logout();
         return "/login";
     }
-
 
     @RequestMapping("/register")
     public String register() {
@@ -91,19 +87,14 @@ public class GreetingController {
     @ResponseBody
     @PostMapping(value = "/addContact", consumes = MediaType.APPLICATION_JSON_VALUE)
     public boolean addContact(@RequestBody ContactDTO contactDTO) {
-        //       userService.saveNewUser(userDTO);
-
         Contacts contacts = contactService.addContact(contactDTO, authenticationService.getUserId());
-        if (contacts == null) {
-            return false;
-        }
+        if (contacts == null) { return false; }
         return true;
     }
 
     @ResponseBody
     @PostMapping(value = "/getGroupsByName", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Groups> findGroupsByPartName(@RequestBody NameDTO nameDTO) {
-
         return groupService.findByPartName(nameDTO.getName(), authenticationService.getUserId());
     }
 
@@ -111,8 +102,6 @@ public class GreetingController {
     @PostMapping(value = "/editcontact", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ContactDTO editContact(@RequestBody ContactDTO contactDTO) {
         return contactService.editContact(contactDTO, authenticationService.getUserId());
-        //   return groupService.findByPartName(nameDTO.getName(),authenticationService.getUserId());
-
     }
 
     @ResponseBody

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 /**
- * Created by sasha on 25.03.2017.
+ * Created by olya on 25.03.2017.
  */
 @Entity
 @Table(name = "contacts")
@@ -21,8 +21,10 @@ public class Contacts {
 
     private String phone;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "groups_id")

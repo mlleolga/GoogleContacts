@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by sasha on 07.04.2017.
+ * Created by olya on 07.04.2017.
  */
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -34,7 +34,6 @@ public class ContactServiceImpl implements ContactService {
             return null;
         }
         Contacts contact = contactMapper.parserToEntity(contactDTO);
-
         contact.setGroups(checkGroup(contactDTO.getGroup(),user));
         contact.setUser(user);
       return contactsRepository.save(contact);
@@ -48,7 +47,6 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public void deleteAllUsersContacts(Long userId) {
         userService.findUserById(userId).getContactsList().forEach(contactsRepository::delete);
-
     }
 
     @Override
